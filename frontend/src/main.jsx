@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 
-import Root from './routes/root.jsx';
+import Root, {loader as navbarLoader} from './routes/root.jsx';
 import About from './routes/about.jsx';
 import ErrorPage from './ui/ErrorPage';
 import Buy, {loader as buyLoader} from './routes/buy.jsx';
 import OurTeams, {loader as ourTeamsLoader} from './routes/ourTeams.jsx';
+import DesignSystem from './routes/designSystem.jsx';
 
 
 
@@ -19,20 +20,26 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
+    loader: navbarLoader,
     children:[{
         path: 'about',
         element: <About />
       },
       {
-        path: 'buy',
+        path: 'cinema',
         element: <Buy />,
         loader: buyLoader
         
       },
       {
-        element: <OurTeams />,
-        path: "team/:teamName",
-        loader: ourTeamsLoader
+        path: 'design-system',
+        element: <DesignSystem />,
+        
+      },
+      {
+        element: <Buy />,
+        path: "series",
+        loader: buyLoader
       }
     ],
     errorElement: <ErrorPage />,

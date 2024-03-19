@@ -26,3 +26,9 @@ export async function fetchPricingData(){
     let data = await answer.json();
     return data;  
 }
+
+export async function fetchNavbar(){
+    let answer = await fetch('/src/lib/data/navbar-data.json');
+    let data = await answer.json();
+    return data.main;
+}

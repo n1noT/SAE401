@@ -1,28 +1,28 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  safelist:["bg-neutral-500", "bg-button-bg", "bg-button-hover"],
   theme: {
     extend: {
-      colors: {
-        background: "hsl(var(--background) /<alpha-value>)",
-        foreground: "hsl(var(--foreground) /<alpha-value>)",
+      colors:{
+        'main-bg' : "var(--global-bg)",
+        'button-bg' : "var(--button-bg)",
+        'button-text' : "var(--button-text)",
+        'button-hover' : "var(--button-link-hover)",
+        'button-secondary-bg' : "var(--button-secondary-bg)",
+        'button-secondary-hover' : "var(--button-secondary-hover)",
+        'button-info-hover' : "var(--button-info-hover)",
       },
-      textColor: {
-        background: "hsl(var(--background) /<alpha-value>)",
-        foreground: "hsl(var(--foreground) /<alpha-value>)",
+      fontFamily:{
+        'button': 'var(--ff)'
       },
-      maxWidth: {
-        ch: "60ch",
+      fontFamily:{
+        'button': 'var(--ff)',
+        'button-secondary': 'var(--ff-little)'
       },
-      aspectRatio: {
-        card: "1 / 1.25",
-      },
-      backgroundImage: {
-        shape: "url('./assets/bgshapes.svg')",
-      },
-      borderRadius: {
-        DEFAULT: "var(--radius)",
-      },
+      padding:{
+        'navbar': 'var(--p-nav)'
+      }
     },
   },
   plugins: [],

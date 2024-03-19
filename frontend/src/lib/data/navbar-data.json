@@ -1,0 +1,39 @@
+{
+    "main": [
+        {
+            "link": "creations",
+            "intent": "main",
+            "name": "Nos Créations"
+        },
+        {
+            "link": "cinema",
+            "intent": "main",
+            "name": "Cinéma"
+        },
+        {
+            "link": "series",
+            "intent": "main",
+            "name": "Séries"
+        },
+        {
+            "link": "sport",
+            "intent": "main",
+            "name": "Sport"
+        },
+        {
+            "link": "docs",
+            "intent": "main",
+            "name": "Docs"
+        },
+        {
+            "link": "jeunesse",
+            "intent": "main",
+            "name": "Jeunesse"
+        },
+        {
+            "link": "chaines",
+            "intent": "main",
+            "name": "Chaînes"
+        }
+    ]
+}
