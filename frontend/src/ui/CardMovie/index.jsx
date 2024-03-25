@@ -40,27 +40,23 @@ const card = cva(base, {
   },
 });
 
-export default function Card({ bgImage, channelImage, intent, size, className, ...rest }) {
+export default function Card({ title, bgImage, channelImage, size }) {
   return <>
-    <div className="block m-1">
-      <a href="" className="block w-full">
-        <div>
-          <div>
+    
+      <div className="block w-full">
             <div className={card({ size})}>
               <div className="bg-top bg-no-repeat bg-cover rounded-sm block">
                 <picture>
                   <source srcSet={bgImage} />
-                  <img src={bgImage} alt="" className="absolute top-0 left-0 w-full h-full bg-top bg-no-repeat bg-cover rounded-sm z-10"/>
+                  <img src={bgImage} alt={title} className="absolute top-0 left-0 w-full h-full bg-top bg-no-repeat bg-cover rounded-sm z-10"/>
                 </picture>
               </div>
               <div className="absolute top-0 left-0 w-full h-full overflow-hidden rounded-sm z-30">
                 <img src={channelImage} alt="" className="absolute bottom-0 left-[0.1875rem] w-[3rem] h-[2.25rem] max-w-[3rem]" />
               </div>
             </div>
-          </div>
-        </div>
-      </a>
-    </div>
+      </div>
+  
 
 
   </>;

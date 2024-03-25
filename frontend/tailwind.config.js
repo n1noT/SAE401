@@ -5,6 +5,7 @@ export default {
   theme: {
     extend: {
       colors:{
+        'clr-T-base' : "var(--text-base)",
         'main-bg' : "var(--global-bg)",
         'button-bg' : "var(--button-bg)",
         'button-text' : "var(--button-text)",
