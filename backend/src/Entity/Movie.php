@@ -26,6 +26,9 @@ class Movie
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'movies')]
     private Collection $category;
 
+    #[ORM\Column(length: 255)]
+    private ?string $urlImage = null;
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
@@ -68,6 +71,18 @@ class Movie
     public function removeCategory(Category $category): static
     {
         $this->category->removeElement($category);
+
+        return $this;
+    }
+
+    public function getUrlImage(): ?string
+    {
+        return $this->urlImage;
+    }
+
+    public function setUrlImage(string $urlImage): static
+    {
+        $this->urlImage = $urlImage;
 
         return $this;
     }

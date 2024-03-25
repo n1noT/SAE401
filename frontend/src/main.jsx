@@ -6,8 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root, {loader as navbarLoader} from './routes/root.jsx';
 import About from './routes/about.jsx';
 import ErrorPage from './ui/ErrorPage';
-import Buy, {loader as buyLoader} from './routes/buy.jsx';
-import OurTeams, {loader as ourTeamsLoader} from './routes/ourTeams.jsx';
+import Cinema, {loader as moviesLoader} from './routes/Cinema.jsx';
 import DesignSystem from './routes/designSystem.jsx';
 
 
@@ -27,8 +26,8 @@ const router = createBrowserRouter([
       },
       {
         path: 'cinema',
-        element: <Buy />,
-        loader: buyLoader
+        element: <Cinema />,
+        loader: moviesLoader
         
       },
       {
@@ -36,11 +35,7 @@ const router = createBrowserRouter([
         element: <DesignSystem />,
         
       },
-      {
-        element: <Buy />,
-        path: "series",
-        loader: buyLoader
-      }
+      
     ],
     errorElement: <ErrorPage />,
 

@@ -41,7 +41,7 @@ const card = cva(base, {
 });
 
 export default function Card({ bgImage, channelImage, intent, size, className, ...rest }) {
-  return <li {...rest} className="w-1/4">
+  return <>
     <div className="block m-1">
       <a href="" className="block w-full">
         <div>
@@ -63,7 +63,7 @@ export default function Card({ bgImage, channelImage, intent, size, className, .
     </div>
 
 
-  </li>;
+  </>;
 }
 
 
