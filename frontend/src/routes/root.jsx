@@ -5,8 +5,8 @@ import { fetchNavbar } from "../lib/loaders.js";
 
 
 
-export async function loader({navbarName}){
-  const navbarData = await fetchNavbar(navbarName);
+export async function loader(){
+  const navbarData = await fetchNavbar('main');
   
   return navbarData;
 }   

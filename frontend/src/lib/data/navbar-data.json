@@ -35,5 +35,32 @@
             "intent": "main",
             "name": "Chaînes"
         }
-    ],"cinema":[]
+    ],
+    "cinema": [
+        {
+            "link": "tous-les-films",
+            "intent": "secondary",
+            "name": "Tous les films"
+        },
+        {
+            "link": "action",
+            "intent": "secondary",
+            "name": "Action"
+        },
+        {
+            "link": "comedie",
+            "intent": "secondary",
+            "name": "Comédie"
+        },
+        {
+            "link": "policier",
+            "intent": "secondary",
+            "name": "Policier"
+        },
+        {
+            "link": "fantastique",
+            "intent": "secondary",
+            "name": "Fantastique"
+        }
+    ]
 }

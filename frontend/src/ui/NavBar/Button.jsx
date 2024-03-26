@@ -25,10 +25,10 @@ const btnType = cva(base, {
 });
 
 // Exportation par défaut de la fonction NavButton
-export default function NavButton({ button }) {
+export default function NavButton({ link, intent, name }) {
   return (
-    <Link to={button.link} className={btnType({ intent: button.intent })}>
-      {button.name}
+    <Link to={link} className={btnType({ intent: intent })}>
+      {name}
     </Link>
   );
 }

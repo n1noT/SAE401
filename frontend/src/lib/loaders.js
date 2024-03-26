@@ -12,6 +12,12 @@ export async function fetchAllCategoriesData() {
     return data; 
 }
 
+export async function fetchCategoryData({catId}) {
+    let answer = await fetch('http://localhost:8080/api/category/'+ catId);
+    let data = await answer.json();
+    return data; 
+}
+
 
 export async function fetchOurTeams(teamName){
     await fakeNetwork();
@@ -40,8 +46,8 @@ export async function fetchPricingData(){
     return data;  
 }
 
-export async function fetchNavbar(){
+export async function fetchNavbar(navName){
     let answer = await fetch('/src/lib/data/navbar-data.json');
     let data = await answer.json();
-    return data.main;
+    return data[navName];
 }

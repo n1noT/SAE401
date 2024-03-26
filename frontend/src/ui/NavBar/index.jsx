@@ -8,7 +8,9 @@ export default function NavBar({nav}) {
     return (
       <li >
         <NavButton
-          button={elt}
+          link={elt.link}
+          intent={elt.intent}
+          name={elt.name}
         />
       </li>
     );

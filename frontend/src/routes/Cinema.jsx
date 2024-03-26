@@ -1,12 +1,15 @@
 import Card from '../ui/CardMovie';
+import NavButton from '../ui/NavBar/Button.jsx';
 import { useLoaderData } from "react-router-dom";
-import { fetchAllMoviesData, fetchAllCategoriesData } from "../lib/loaders.js";
+import { fetchAllMoviesData, fetchAllCategoriesData, fetchNavbar} from "../lib/loaders.js";
 import { Link } from 'react-router-dom';
 
 export async function loader(){
     let moviesData = await fetchAllMoviesData();
     let catData = await fetchAllCategoriesData();
-    return {movies : moviesData, categories : catData};
+    let navData = await fetchNavbar('cinema');
+
+    return {movies : moviesData, categories : catData, nav : navData };
   }
   
   export default function Cinema() {
@@ -14,6 +17,8 @@ export async function loader(){
     const data = useLoaderData();
 
     let categoryList = [];
+    let categoryNav = [];
+
     for (let category of data.categories){
       
       let moviesList = data.movies.map((mov) => {
@@ -54,10 +59,20 @@ export async function loader(){
             </ul>
           </li>
       )
+
+      categoryNav.push(
+        <li>
+          <NavButton link={'/cinema/genre/' + category.id} intent='secondary' name={category.name}></NavButton>
+        </li>
+      )
     }
     
     return (
       <ul>
+        <h2 className='text-clr-T-base font-button-secondary text-4xl'>Cinéma</h2>
+        <ul className='flex'>
+          {categoryNav}
+        </ul>
         {categoryList}
 
       </ul>
