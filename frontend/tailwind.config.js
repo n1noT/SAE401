@@ -15,9 +15,6 @@ export default {
         'button-info-hover' : "var(--button-info-hover)",
       },
       fontFamily:{
-        'button': 'var(--ff)'
-      },
-      fontFamily:{
         'button': 'var(--ff)',
         'button-secondary': 'var(--ff-little)'
       },

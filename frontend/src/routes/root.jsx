@@ -19,7 +19,7 @@ export default function Root() {
 
   return (
     <>
-      <section className='bg-main-bg h-screen'>
+      <section className='bg-main-bg'>
         <Navbar nav={navbar}/>
         <Outlet />
       </section>
