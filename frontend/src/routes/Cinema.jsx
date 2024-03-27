@@ -3,6 +3,7 @@ import NavButton from '../ui/NavBar/Button.jsx';
 import { useLoaderData } from "react-router-dom";
 import { fetchAllMoviesData, fetchAllCategoriesData, fetchNavbar} from "../lib/loaders.js";
 import { Link } from 'react-router-dom';
+import Genre  from '../routes/Genre';
 
 export async function loader(){
     let moviesData = await fetchAllMoviesData();
@@ -70,7 +71,8 @@ export async function loader(){
     }
     
     return (
-      <ul>
+      <>
+        <ul>
         <h2 className='text-clr-T-base font-button-secondary text-4xl'>Cinéma</h2>
         <ul className='flex'>
           {categoryNav}
@@ -78,5 +80,8 @@ export async function loader(){
         {categoryList}
 
       </ul>
+      <Genre data={data}/>
+      </>
+      
     )
   }
