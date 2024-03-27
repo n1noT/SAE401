@@ -32,9 +32,10 @@ const router = createBrowserRouter([
         children:[{
           path: 'genre/:categoryName',
           element: <Genre />,
-          loader: genreLoader,
+          loader: genreLoader
         },]
       },
+      
       {
         path: 'design-system',
         element: <DesignSystem />,

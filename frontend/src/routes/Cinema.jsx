@@ -22,9 +22,9 @@ export async function loader(){
     for (let category of data.categories){
       
       let moviesList = data.movies.map((mov) => {
-        
-        if(category.name ==  mov.category[0].name){
-          let imageBox = './assets/images/'+mov.urlImage;
+        for(let i = 0; i< mov.category.length; i++){
+          if(category.name ==  mov.category[i].name){
+          let imageBox = '/assets/images/'+mov.urlImage;
           
           return (
             <li key={mov.id} className="w-1/4 block m-1">
@@ -32,7 +32,7 @@ export async function loader(){
                 <Card
                   bgImage={imageBox}
                   title={mov.name}
-                  channelImage={'./assets/images/logoCanal.webp'}
+                  channelImage={'/assets/images/logoCanal.webp'}
                   size="small"
                 />
                 <div className='text-clr-T-base'>
@@ -47,6 +47,8 @@ export async function loader(){
             </li>
           );
           }
+        }
+        
         }
         
       )
