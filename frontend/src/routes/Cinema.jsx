@@ -4,6 +4,7 @@ import { useLoaderData } from "react-router-dom";
 import { fetchAllMoviesData, fetchAllCategoriesData, fetchNavbar} from "../lib/loaders.js";
 import { Link } from 'react-router-dom';
 import Genre  from '../routes/Genre.jsx';
+import { useLocation } from 'react-router-dom';
 
 // export async function loader(){
 //     let moviesData = await fetchAllMoviesData();
@@ -13,11 +14,11 @@ import Genre  from '../routes/Genre.jsx';
 //     return {movies : moviesData, categories : catData};
 // }
   
-  export default function Cinema({data}) {
+  export default function Cinema() {
 
-    // const data = useLoaderData();
-
-    console.log(data)
+    const dataReceived = useLocation();
+    const data= dataReceived.state.data;
+  
     let categoryList = [];
     let categoryNav = [];
 

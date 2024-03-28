@@ -18,7 +18,7 @@ export async function loader(){
 
 export default function Root() {
 
-  const data = useLoaderData();
+  const dataName = useLoaderData();
 
 
 
@@ -26,7 +26,7 @@ export default function Root() {
     <>
       <section className='bg-main-bg'>
         <Navbar nav={data.nav}/>
-        <Outlet {...data}/>
+        <Outlet data={dataName}/>
       </section>
     </>
   );
