@@ -3,20 +3,21 @@ import NavButton from '../ui/NavBar/Button.jsx';
 import { useLoaderData } from "react-router-dom";
 import { fetchAllMoviesData, fetchAllCategoriesData, fetchNavbar} from "../lib/loaders.js";
 import { Link } from 'react-router-dom';
-import Genre  from '../routes/Genre';
+import Genre  from '../routes/Genre.jsx';
 
-export async function loader(){
-    let moviesData = await fetchAllMoviesData();
-    let catData = await fetchAllCategoriesData();
-    let navData = await fetchNavbar('cinema');
+// export async function loader(){
+//     let moviesData = await fetchAllMoviesData();
+//     let catData = await fetchAllCategoriesData();
 
-    return {movies : moviesData, categories : catData, nav : navData };
-  }
+
+//     return {movies : moviesData, categories : catData};
+// }
   
-  export default function Cinema() {
+  export default function Cinema({data}) {
 
-    const data = useLoaderData();
+    // const data = useLoaderData();
 
+    console.log(data)
     let categoryList = [];
     let categoryNav = [];
 

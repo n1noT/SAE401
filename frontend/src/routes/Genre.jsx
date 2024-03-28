@@ -9,7 +9,10 @@ export async function loader({params}){
     return moviesData;
   }
   
-  export default function Genre({data}) {
+  export default function Genre() {
+
+    let data = useLoaderData();
+
       let moviesList = data.movies.map((mov) => {
           let imageBox = '/assets/images/'+mov.urlImage;
           
