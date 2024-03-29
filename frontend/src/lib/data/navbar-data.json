@@ -6,7 +6,7 @@
             "name": "Nos Créations"
         },
         {
-            "link": "cinema",
+            "link": "cinema/accueil",
             "intent": "main",
             "name": "Cinéma"
         },

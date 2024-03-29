@@ -12,7 +12,7 @@ export async function loader(){
   let catData = await fetchAllCategoriesData();
   let navbarData = await fetchNavbar('main');
 
-  return {movies : moviesData, categories : catData, nav: navbarData};
+  return { moviesData, categories : catData, nav: navbarData };
 }
 
 
@@ -24,9 +24,9 @@ export default function Root() {
 
   return (
     <>
-      <section className='bg-main-bg'>
-        <Navbar nav={data.nav}/>
-        <Outlet data={dataName}/>
+      <section className='bg-main-bg min-h-screen'>
+        <Navbar nav={dataName.nav}/>
+        <Outlet />
       </section>
     </>
   );

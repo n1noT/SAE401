@@ -1,69 +1,33 @@
-import Card from '../ui/CardMovie';
+
 import NavButton from '../ui/NavBar/Button.jsx';
-import { useLoaderData } from "react-router-dom";
+import { Outlet, useLoaderData } from "react-router-dom";
 import { fetchAllMoviesData, fetchAllCategoriesData, fetchNavbar} from "../lib/loaders.js";
-import { Link } from 'react-router-dom';
-import Genre  from '../routes/Genre.jsx';
-import { useLocation } from 'react-router-dom';
 
-// export async function loader(){
-//     let moviesData = await fetchAllMoviesData();
-//     let catData = await fetchAllCategoriesData();
+import {moviesContext}  from '../context/moviesContext.jsx';
+import {categoriesContext}  from '../context/categoriesContext.jsx';
 
 
-//     return {movies : moviesData, categories : catData};
-// }
+
+export async function loader(){
+     let moviesData = await fetchAllMoviesData();
+     let catData = await fetchAllCategoriesData();
+
+     return {movies : moviesData, categories : catData};
+}
   
   export default function Cinema() {
-
-    const dataReceived = useLocation();
-    const data= dataReceived.state.data;
+    
+    const data = useLoaderData()
   
-    let categoryList = [];
     let categoryNav = [];
 
+    categoryNav.push(
+      <li>
+        <NavButton link={'/cinema/genre/tous-les-films'} intent='secondary' name={'Tous Les Films'}></NavButton>
+      </li>
+    )
+
     for (let category of data.categories){
-      
-      let moviesList = data.movies.map((mov) => {
-        for(let i = 0; i< mov.category.length; i++){
-          if(category.name ==  mov.category[i].name){
-          let imageBox = '/assets/images/'+mov.urlImage;
-          
-          return (
-            <li key={mov.id} className="w-1/4 block m-1">
-              <Link to={'/cinema/'+ mov.id}>
-                <Card
-                  bgImage={imageBox}
-                  title={mov.name}
-                  channelImage={'/assets/images/logoCanal.webp'}
-                  size="small"
-                />
-                <div className='text-clr-T-base'>
-                  <h3>
-                    {mov.name}
-                  </h3>
-                  <h3 className='opacity-50'>
-                    {'Film ' + mov.category[0].name}
-                  </h3>
-                </div>
-              </Link>
-            </li>
-          );
-          }
-        }
-        
-        }
-        
-      )
-        
-      categoryList.push(
-          <li className='mt-8 '>
-            <h3 className='text-clr-T-base font-button-secondary text-2xl'>{category.name}</h3>
-            <ul className="flex ">
-                {moviesList}
-            </ul>
-          </li>
-      )
 
       categoryNav.push(
         <li>
@@ -74,15 +38,19 @@ import { useLocation } from 'react-router-dom';
     
     return (
       <>
-        <ul>
-        <h2 className='text-clr-T-base font-button-secondary text-4xl'>Cinéma</h2>
-        <ul className='flex'>
-          {categoryNav}
-        </ul>
-        {categoryList}
+        <categoriesContext.Provider value={data.categories}>
+          <moviesContext.Provider value={data.movies}>
+              <div>
+                <h2 className='text-clr-T-base font-button-secondary text-4xl'>Cinéma</h2>
+                <ul className='flex'>
+                  {categoryNav}
+                </ul>
+          
 
-      </ul>
-      <Genre data={data}/>
+              </div>
+              <Outlet/>
+          </moviesContext.Provider>
+        </categoriesContext.Provider>
       </>
       
     )
