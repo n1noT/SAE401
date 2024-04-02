@@ -11,23 +11,8 @@ export async function fetchAllCategoriesData() {
     return categories; 
 }
 
-export async function fetchSearch() {
-    let headers = new Headers();
-
-    headers.append('Content-Type', 'application/json');
-    headers.append('Accept', 'application/json');
-
-    headers.append('Access-Control-Allow-Origin', 'http://localhost:8080');
-    headers.append('Access-Control-Allow-Credentials', 'true');
-
-    headers.append('GET', 'POST', 'OPTIONS');
-
-    let answer = await fetch('http://localhost:8080/api/movies/searchContent?search=Yannick', {
-      //mode: 'no-cors',
-      credentials: 'include',
-      method: 'POST',
-      headers: headers
-    });
+export async function fetchSearch(searched) {
+    let answer = await fetch('http://localhost:8080/api/movies/searchContent?search=' + searched);
     let data = await answer.json();
     console.log(data)
     return data; 

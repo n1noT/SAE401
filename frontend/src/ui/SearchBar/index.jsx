@@ -1,12 +1,27 @@
-export default function SearchBar(){
-    
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
+export default function SearchBar() {
+    const [searchTerm, setSearchTerm] = useState("");
+
+    const navigate = useNavigate();
+
+    function searchRedirect() {
+        navigate(`/searchContent/${searchTerm}`);
+    }
 
     return (
-        <>
-        <form action="http://localhost:8090/searchContent">
-            <input type="search" placeholder="Rechercher"/>
-            <button type="submit" >Rechercher</button>
-        </form>
-        </>
-    )
+        <div className="flex gap-2 justify-center items-center p-2 h-full border-2 border-button-secondary-bg rounded-md">
+            <input 
+                id="searchInput" 
+                name="search" 
+                type="search" 
+                placeholder="Rechercher" 
+                value={searchTerm} 
+                onChange={(e) => setSearchTerm(e.target.value)} 
+                className="h-full bg-main-bg text-clr-T-base focus-visible:outline-none "
+            />
+            <button onClick={searchRedirect} className="h-6 w-6"><img src="/assets/icon/search.svg" alt="bouton recherche" className="h-6 w-6"/></button>
+        </div>
+    );
 }

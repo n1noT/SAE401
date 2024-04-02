@@ -35,7 +35,7 @@ export default function Genre() {
           let imageBox = '/assets/images/' + mov.urlImage;
   
           return (
-            <li key={mov.id} className="w-1/4 block m-1">
+            <li key={mov.id} className="block m-1">
               <Link to={'/cinema/' + mov.id}>
                 <Card
                   bgImage={imageBox}

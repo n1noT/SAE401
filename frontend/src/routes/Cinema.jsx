@@ -40,14 +40,14 @@ export async function loader(){
       <>
         <categoriesContext.Provider value={data.categories}>
           <moviesContext.Provider value={data.movies}>
-              <div>
-                <h2 className='text-clr-T-base font-button-secondary text-4xl'>Cinéma</h2>
+              <section className='p-8'>
+                <h2 className='text-clr-T-base font-button-secondary text-4xl mt-4 p-2 font-bold'>Cinéma</h2>
                 <ul className='flex'>
                   {categoryNav}
                 </ul>     
 
-              </div>
-              <Outlet/>
+                <Outlet/>
+              </section>
           </moviesContext.Provider>
         </categoriesContext.Provider>
       </>

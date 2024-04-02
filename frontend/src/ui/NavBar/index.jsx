@@ -6,7 +6,7 @@ export default function NavBar({nav}) {
   let navElements = nav.map((elt) => {
  
     return (
-      <li >
+      <li className='h-min'>
         <NavButton
           link={elt.link}
           intent={elt.intent}
@@ -18,12 +18,12 @@ export default function NavBar({nav}) {
 
   return (
 
-<nav className="flex">
+<nav className="flex border-b-2 border-button-secondary-bg w-full">
 
-    <ul className="flex mx-4">
+    <ul className="flex mx-4 h-fit justify-between w-full max-w-bar">
         {navElements}
       </ul>
-    <div className="">
+    <div className="flex justify-center items-center p-2" >
         <SearchBar/>    
     </div>
 

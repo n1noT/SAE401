@@ -13,7 +13,7 @@ export default function ListedMovies ({data}){
         let imageBox = '/assets/images/'+mov.urlImage;
         
         return (
-            <li key={mov.id} className="w-1/4 block m-1">
+            <li key={mov.id} className="block m-1">
             <Link to={'/cinema/'+ mov.id}>
                 <Card
                 bgImage={imageBox}
@@ -41,7 +41,7 @@ export default function ListedMovies ({data}){
         
     categoryList.push(
         <li className='mt-8 '>
-            <h3 className='text-clr-T-base font-button-secondary text-2xl'>{category.name}</h3>
+            <h3 className='text-clr-T-base font-button-secondary text-2xl font-bold m-1'>{category.name}</h3>
             <ul className="flex ">
                 {moviesList}
             </ul>
@@ -50,7 +50,7 @@ export default function ListedMovies ({data}){
     }
 
     return(
-        <ul>
+        <ul className='w-full'>
             {categoryList}
         </ul>
     )

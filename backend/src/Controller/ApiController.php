@@ -34,7 +34,7 @@ class ApiController extends AbstractController
         $data = $serializer->normalize($mov->findAll(), null, ['groups' => 'json_movie']);
 
         $response = new JsonResponse( $data );
-        var_dump($response);
+        
         return $response;
     }
 
@@ -57,6 +57,7 @@ class ApiController extends AbstractController
         // $serializer est un service de Symfony injecté dans la méthode readMovie
         // $data est la représentation serialisée/normalisée de l'entity $mov
         $search = $request->query->get('search');
+
         $data = $serializer->normalize($mov->findLike($search), null, ['groups' => 'json_movie']);
         // $response est une instance de JsonResponse qui hérite de Response
         // C'est la classe à utiliser lorsque l'on veut retourner du JSON
@@ -64,10 +65,7 @@ class ApiController extends AbstractController
         
         
         $response = new JsonResponse( $data );
-        var_dump($response);
-        // $response->headers->set('Access-Control-Allow-Origin', '*');
-        // $response->headers->set('Access-Control-Allow-Methods', 'GET, OPTIONS');
-        // $response->headers->set('Access-Control-Allow-Headers', 'Content-Type');
+       
 
         return $response;
     }

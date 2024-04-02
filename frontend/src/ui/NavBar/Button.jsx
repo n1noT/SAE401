@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { cva } from "class-variance-authority";
 
 // Définition de la base
-const base = "p-navbar hover:text-button-bg focus:text-button-bg text-button-text font-button-secondary transition ease-in-out delay-250 inline-flex";
+const base = "p-navbar hover:text-button-bg focus:text-button-bg text-button-text font-button-secondary transition ease-in-out delay-250 inline-flex font-bold";
 
 const btnType = cva(base, {
     variants: {

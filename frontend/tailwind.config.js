@@ -20,6 +20,9 @@ export default {
       },
       padding:{
         'navbar': 'var(--p-nav)'
+      },
+      maxWidth:{
+        'bar': '40rem'
       }
     },
   },
