@@ -36,13 +36,15 @@ class MovieRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?Movie
-    //    {
-    //        return $this->createQueryBuilder('m')
-    //            ->andWhere('m.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+
+    // Fonction qui retourne un tableau de Movie dont le nom contient la valeur recherché
+    public function findLike($value): array
+       {
+            return $this->createQueryBuilder('m')
+                ->where('m.name LIKE :search')
+                ->setParameter('search', '%' . $value . '%')
+                ->getQuery()
+                ->getResult()
+            ;
+    }
 }

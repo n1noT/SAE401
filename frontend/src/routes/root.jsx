@@ -26,6 +26,7 @@ export default function Root() {
     <>
       <section className='bg-main-bg min-h-screen'>
         <Navbar nav={dataName.nav}/>
+        
         <Outlet />
       </section>
     </>

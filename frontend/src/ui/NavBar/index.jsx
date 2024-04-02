@@ -1,10 +1,10 @@
-import {Link} from 'react-router-dom';
+import SearchBar from '../SearchBar';
 import NavButton from './Button';
 
 
 export default function NavBar({nav}) {
   let navElements = nav.map((elt) => {
-    // console.log(index);
+ 
     return (
       <li >
         <NavButton
@@ -24,7 +24,7 @@ export default function NavBar({nav}) {
         {navElements}
       </ul>
     <div className="">
-        <Link className="hover:text-[#BBA] focus:text-[#BB0]" to="/design-system">Design System</Link>     
+        <SearchBar/>    
     </div>
 
 </nav>

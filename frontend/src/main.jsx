@@ -10,6 +10,7 @@ import Cinema , {loader as moviesLoader} from './routes/Cinema.jsx';
 import AccueilCinema from './routes/AccueilCinema.jsx';
 import Genre from './routes/Genre.jsx';
 import DesignSystem from './routes/designSystem.jsx';
+import SearchContent, {loader as searchLoader} from './routes/SearchContext.jsx';
 
 import './index.css';
 
@@ -38,11 +39,15 @@ const router = createBrowserRouter([
           
         },]
       },
-      
       {
         path: 'design-system',
         element: <DesignSystem />,
         
+      },
+      {
+        path: 'searchContent',
+        element: <SearchContent/>,
+        loader: searchLoader
       },
       
     ],

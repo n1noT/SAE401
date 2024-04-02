@@ -34,33 +34,41 @@ class ApiController extends AbstractController
         $data = $serializer->normalize($mov->findAll(), null, ['groups' => 'json_movie']);
 
         $response = new JsonResponse( $data );
+        var_dump($response);
         return $response;
     }
 
-    #[Route('/api/movies/{id}', name: 'app_api_movie', methods:['GET'])]
-    public function readMovie(Movie $mov, SerializerInterface $serializer ): Response
-    {
-        // $serializer est un service de Symfony injecté dans la méthode readMovie
-        // $data est la représentation serialisée/normalisée de l'entity $mov
-        $data = $serializer->normalize($mov, null, ['groups' => 'json_movie']);
-        // $response est une instance de JsonResponse qui hérite de Response
-        // C'est la classe à utiliser lorsque l'on veut retourner du JSON
-        // $data sera automatiquement encodé en JSON
-        $response = new JsonResponse( $data );
-        return $response;
-    }
+    // #[Route('/api/movies/{id}', name: 'app_api_movie', methods:['GET'])]
+    // public function readMovie(Movie $mov, SerializerInterface $serializer ): Response
+    // {
+    //     // $serializer est un service de Symfony injecté dans la méthode readMovie
+    //     // $data est la représentation serialisée/normalisée de l'entity $mov
+    //     $data = $serializer->normalize($mov, null, ['groups' => 'json_movie']);
+    //     // $response est une instance de JsonResponse qui hérite de Response
+    //     // C'est la classe à utiliser lorsque l'on veut retourner du JSON
+    //     // $data sera automatiquement encodé en JSON
+    //     $response = new JsonResponse( $data );
+    //     return $response;
+    // }
 
-    #[Route('/api/movies/search', name: 'app_api_search_movie', methods:['GET'])]
-    public function search(Request $request, SerializerInterface $serializer ): Response
+    #[Route('/api/movies/searchContent', name: 'app_api_search_movie', methods:['GET'])]
+    public function search(Request $request, MovieRepository $mov, SerializerInterface $serializer ): Response
     {
         // $serializer est un service de Symfony injecté dans la méthode readMovie
         // $data est la représentation serialisée/normalisée de l'entity $mov
         $search = $request->query->get('search');
-        $data = $serializer->normalize($search, null, ['groups' => 'json_movie']);
+        $data = $serializer->normalize($mov->findLike($search), null, ['groups' => 'json_movie']);
         // $response est une instance de JsonResponse qui hérite de Response
         // C'est la classe à utiliser lorsque l'on veut retourner du JSON
         // $data sera automatiquement encodé en JSON
+        
+        
         $response = new JsonResponse( $data );
+        var_dump($response);
+        // $response->headers->set('Access-Control-Allow-Origin', '*');
+        // $response->headers->set('Access-Control-Allow-Methods', 'GET, OPTIONS');
+        // $response->headers->set('Access-Control-Allow-Headers', 'Content-Type');
+
         return $response;
     }
 

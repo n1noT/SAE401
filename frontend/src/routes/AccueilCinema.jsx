@@ -6,8 +6,6 @@ import ListedMovies from '../ui/ListedMovies';
 export default function Genre() {
     
     const data = {movies : useContext(moviesContext), categories : useContext(categoriesContext)};
-
-    console.log(data)
    
       
     

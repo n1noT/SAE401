@@ -44,8 +44,7 @@ export async function loader(){
                 <h2 className='text-clr-T-base font-button-secondary text-4xl'>Cinéma</h2>
                 <ul className='flex'>
                   {categoryNav}
-                </ul>
-          
+                </ul>     
 
               </div>
               <Outlet/>
