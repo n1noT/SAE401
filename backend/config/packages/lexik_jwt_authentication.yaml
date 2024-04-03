@@ -1,0 +1,5 @@
+lexik_jwt_authentication:
+    secret_key: '%kernel.project_dir%/config/jwt/private.pem' # Le chemin vers votre clé privée JWT
+    public_key: '%kernel.project_dir%/config/jwt/public.pem' # Le chemin vers votre clé publique JWT
+    pass_phrase: 'D!mtr0v;;(' # Le mot de passe pour votre clé privée (si nécessaire)
+    token_ttl: 3600 # Durée de validité du jeton JWT en secondes

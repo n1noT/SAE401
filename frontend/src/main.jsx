@@ -11,6 +11,7 @@ import AccueilCinema from './routes/AccueilCinema.jsx';
 import Genre from './routes/Genre.jsx';
 import DesignSystem from './routes/designSystem.jsx';
 import SearchContent, {loader as searchLoader} from './routes/SearchContent.jsx';
+import LogPage from './routes/LogPage.jsx';
 
 import './index.css';
 
@@ -48,6 +49,11 @@ const router = createBrowserRouter([
         path: 'searchContent/:searched',
         element: <SearchContent />,
         loader: searchLoader
+      },
+      {
+        path: 'login',
+        element: <LogPage />,
+      
       },
       
     ],

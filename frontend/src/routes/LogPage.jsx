@@ -1,40 +1,43 @@
-import { useState } from "react";
+import React, { useState } from 'react';
+import axios from 'axios';
 
-export default function LogPage (){
-    const [state, setState] = {username: '', password: ''}
-    
-      handleChange = (event) => {
-        setState({ [event.target.name]: event.target.value });
-      }
-    
-      handleSubmit = async (event) => {
-        event.preventDefault();
-        const { username, password } = state;
-        try {
-          const response = await fetch('http://localhost:8080/api/login', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username, password })
-          });
-          const data = await response.json();
-          // Stocker le jeton JWT dans le stockage local ou les cookies
-          localStorage.setItem('token', data.token);
-          // Rediriger l'utilisateur vers une page protégée ou actualiser la page
-          window.location.reload();
-        } catch (error) {
-          console.error('Erreur de connexion:', error);
-        }
-      }
-    
-    
-    return (
-        <form onSubmit={this.handleSubmit}>
-            <input type="text" name="username" value={this.state.username} onChange={this.handleChange} />
-            <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
-            <button type="submit">Se connecter</button>
-        </form>
-    );
-      
-}
+export default function LogPage() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:8080/login', { username, password });
+      const { token } = response.data; // Extraction du jeton JWT de la réponse
+      // Stockage du jeton JWT dans le localStorage ou un cookie
+      localStorage.setItem('jwtToken', token);
+      // Redirection vers une autre page ou mise à jour de l'état de l'application
+      // Par exemple : history.push('/dashboard');
+    } catch (error) {
+      setError('Identifiants invalides');
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="Nom d'utilisateur"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Mot de passe"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button type="submit">Se connecter</button>
+      {error && <p>{error}</p>}
+    </form>
+  );
+};
+
+

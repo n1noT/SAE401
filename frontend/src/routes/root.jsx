@@ -8,11 +8,9 @@ import { fetchNavbar, fetchAllMoviesData, fetchAllCategoriesData } from "../lib/
  
 
 export async function loader(){
-  let moviesData = await fetchAllMoviesData();
-  let catData = await fetchAllCategoriesData();
   let navbarData = await fetchNavbar('main');
 
-  return { moviesData, categories : catData, nav: navbarData };
+  return {nav: navbarData };
 }
 
 
