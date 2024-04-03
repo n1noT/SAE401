@@ -11,14 +11,14 @@
         font-style: normal;
         font-weight: 400;
         font-display: swap;
-        src: url(./assets/fonts/452d21864b13276bedda.woff2) format('woff2');
+        src: url(http://localhost:8090/assets/fonts/452d21864b13276bedda.woff2) format('woff2');
     }
     @font-face {
         font-family: 'Hind';
         font-style: normal;
         font-weight: 400;
         font-display: swap;
-        src: url(./assets/fonts/ce2c6de55c166077a5ca.woff2) format('woff2');
+        src: url(http://localhost:8090/assets/fonts/ce2c6de55c166077a5ca.woff2) format('woff2');
     }
     :root{
         --color-amaranth : #ec3655;

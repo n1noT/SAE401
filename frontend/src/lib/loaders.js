@@ -14,7 +14,7 @@ export async function fetchAllCategoriesData() {
 export async function fetchSearch(searched) {
     let answer = await fetch('http://localhost:8080/api/movies/searchContent?search=' + searched);
     let data = await answer.json();
-    console.log(data)
+ 
     return data; 
 }
 

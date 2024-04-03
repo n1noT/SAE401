@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -33,8 +34,14 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
 
             // do anything else you need here, like send an email
+            $referer = $request->headers->get('referer');
+            if($referer == 'http://localhost:8080/register'){
+                return new RedirectResponse('http://localhost:8090');
+            }
+            else{
+                return new RedirectResponse($referer);
+            }
 
-            return $this->redirectToRoute('app_api_registered');
         }
 
         return $this->render('registration/register.html.twig', [

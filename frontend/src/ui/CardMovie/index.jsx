@@ -45,14 +45,14 @@ export default function Card({ title, bgImage, channelImage, size }) {
     
       <div className="block w-56">
             <div className={card({ size})}>
-              <div className="bg-top bg-no-repeat bg-cover rounded-sm block">
+              <div className="bg-top bg-no-repeat bg-cover rounded-sm block z-10 ">
                 <picture >
-                  <source srcSet={bgImage} />
+                  <source srcSet={bgImage} className=" w-full h-full bg-top bg-no-repeat bg-cover rounded-sm z-10" />
                   <img src={bgImage} alt={title} className="absolute top-0 left-0 w-full h-full bg-top bg-no-repeat bg-cover rounded-sm z-10"/>
                 </picture>
               </div>
-              <div className="absolute top-0 left-0 h-full overflow-hidden rounded-sm z-30">
-                <img src={channelImage} alt={title} className="absolute bottom-0 left-[0.1875rem] w-[3rem] h-[2.25rem] max-w-[3rem] " />
+              <div className="absolute top-0 left-0 h-full rounded-sm z-30">
+                <img src={channelImage} alt={title} className="absolute bottom-0 left-[0.1875rem] w-[3rem] h-[2.25rem] max-w-[3rem] z-30" />
               </div>
             </div>
       </div>

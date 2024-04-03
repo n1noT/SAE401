@@ -10,8 +10,14 @@ export default function SearchBar() {
         navigate(`/searchContent/${searchTerm}`);
     }
 
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            searchRedirect();
+      };
+    }
+
     return (
-        <div className="flex gap-2 justify-center items-center p-2 h-full border-2 border-button-secondary-bg rounded-md">
+        <div className="flex gap-2 justify-center items-center p-2 h-full border-2 border-button-secondary-bg rounded-md" >
             <input 
                 id="searchInput" 
                 name="search" 
@@ -19,7 +25,8 @@ export default function SearchBar() {
                 placeholder="Rechercher" 
                 value={searchTerm} 
                 onChange={(e) => setSearchTerm(e.target.value)} 
-                className="h-full bg-main-bg text-clr-T-base focus-visible:outline-none "
+                className="h-full bg-main-bg text-clr-T-base focus-visible:outline-none"
+                onKeyPress={handleKeyPress}
             />
             <button onClick={searchRedirect} className="h-6 w-6"><img src="/assets/icon/search.svg" alt="bouton recherche" className="h-6 w-6"/></button>
         </div>

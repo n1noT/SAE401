@@ -1,4 +1,5 @@
 import Card from '../CardMovie'
+import TitleContent from '../TitleContent'
 import { Link } from 'react-router-dom';
 
 export default function ListedMovies ({data}){
@@ -13,7 +14,7 @@ export default function ListedMovies ({data}){
         let imageBox = '/assets/images/'+mov.urlImage;
         
         return (
-            <li key={mov.id} className="block m-1">
+            <li key={mov.id} className="block m-1 w-min">
             <Link to={'/cinema/'+ mov.id}>
                 <Card
                 bgImage={imageBox}
@@ -21,14 +22,7 @@ export default function ListedMovies ({data}){
                 channelImage={'/assets/images/logoCanal.webp'}
                 size="small"
                 />
-                <div className='text-clr-T-base'>
-                <h3>
-                    {mov.name}
-                </h3>
-                <h3 className='opacity-50'>
-                    {'Film ' + mov.category[0].name}
-                </h3>
-                </div>
+                <TitleContent name={mov.name} category={mov.category[0].name} content='Film'/>
             </Link>
             </li>
         );
