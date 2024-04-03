@@ -1,5 +1,5 @@
 <?php
-/*
+
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,8 +30,10 @@ class SecurityController extends AbstractController
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 }
-*/
 
+
+
+/*
 namespace App\Controller;
 
 use App\Repository\UserRepository;
@@ -42,6 +44,8 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Routing\Attribute\Route;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class SecurityController extends AbstractController
 {
@@ -52,18 +56,20 @@ class SecurityController extends AbstractController
         $this->jwtManager = $jwtManager;
     }
 
-    #[Route(path: '/login', name: 'app_login')]
-    public function login(Request $request, AuthenticationUtils $authenticationUtils, UserRepository $userRep): Response
+    #[Route(path: '/login', name: 'app_login_user')]
+    public function login(Request $request, AuthenticationUtils $authenticationUtils,  UserPasswordHasherInterface $userPasswordHasher ,UserRepository $userRep): Response
     {
         // Récupérez les informations d'identification de la demande
         $username = $request->request->get('username');
         $password = $request->request->get('password');
 
-        // Vérifiez les informations d'identification (vous devrez remplacer cette logique par votre propre méthode d'authentification)
-        // Si les informations d'identification sont valides, identifiez l'utilisateur
-        $user = $userRep->findOneBy(['email' => $username]);
+        $user = $userRep->findOneBySomeEmail($username);
+        
+        return new JsonResponse(['username' => [$user]]);
+        
+        $hashedPassword = $userPasswordHasher->hashPassword($user, $password);
 
-        if (!$user || !password_verify($password, $user->getPassword())) {
+        if (!$user || !password_verify($hashedPassword, $user->getPassword())) {
             // Si les informations d'identification sont invalides, retournez une réponse d'erreur
             return $this->json(['message' => 'Identifiants invalides'], 401);
         }
@@ -73,6 +79,7 @@ class SecurityController extends AbstractController
 
         // Retournez le jeton JWT comme réponse à la demande de connexion
         return $this->json(['token' => $token]);
+        
     }
 
     #[Route(path: '/logout', name: 'app_logout')]
@@ -81,4 +88,4 @@ class SecurityController extends AbstractController
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 }
-
+*/

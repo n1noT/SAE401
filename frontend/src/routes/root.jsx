@@ -1,7 +1,7 @@
 import Navbar from '../ui/NavBar'
 import { Outlet } from 'react-router-dom';
 import { useLoaderData } from "react-router-dom";
-import { fetchNavbar, fetchAllMoviesData, fetchAllCategoriesData } from "../lib/loaders.js";
+import { fetchNavbar} from "../lib/loaders.js";
 
 
 

@@ -33,6 +33,7 @@
         --text-base: var(--color-white);
         
         --global-bg: var(--color-black) ;
+        --login-bg: var(--color-white) ;
         --button-bg: var(--color-amaranth) ;
         --button-text: var(--text-base) ;
         --button-link-hover: var(--color-amaranth-dark) ;
