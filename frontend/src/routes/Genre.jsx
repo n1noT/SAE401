@@ -18,11 +18,11 @@ export default function Genre() {
 
   if (params.categoryId == 'tous-les-films') {
     return (
-      <ul className='flex flex-wrap'>
+      <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-2 mt-4'>
   
         <GridMovie data={data}/>
   
-      </ul>
+      </div>
     )
 
 
@@ -40,11 +40,11 @@ export default function Genre() {
     )
 
     return (
-      <ul className='flex flex-wrap'>
+      <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-2 mt-4'>
   
         <GridMovie data={dataMovie}/>
   
-      </ul>
+      </div>
     )
   }
 

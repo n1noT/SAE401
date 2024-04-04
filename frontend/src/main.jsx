@@ -7,6 +7,7 @@ import Root, {loader as navbarLoader} from './routes/root.jsx';
 import About from './routes/about.jsx';
 import ErrorPage from './ui/ErrorPage';
 import Cinema , {loader as moviesLoader} from './routes/Cinema.jsx';
+import Movie , {loader as movieInfoLoader} from './routes/Movie.jsx';
 import AccueilCinema from './routes/AccueilCinema.jsx';
 import Genre from './routes/Genre.jsx';
 import DesignSystem from './routes/designSystem.jsx';
@@ -38,7 +39,12 @@ const router = createBrowserRouter([
           path: 'accueil',
           element: <AccueilCinema />,
           
-        },]
+        }]
+      },
+      ,{
+        path: 'movie/:idmovie',
+        element: <Movie/>,
+        loader: movieInfoLoader,
       },
       {
         path: 'design-system',

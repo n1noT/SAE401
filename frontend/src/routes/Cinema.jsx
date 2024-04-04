@@ -44,9 +44,9 @@ export async function loader(){
       <Suspense fallback={<Loading/>}>
         <categoriesContext.Provider value={data.categories}>
           <moviesContext.Provider value={data.movies}>
-              <section className='p-8'>
+              <section className='p-2 md:p-8'>
                 <h2 className='text-clr-T-base font-button-secondary text-4xl mt-4 p-2 font-bold'>Cinéma</h2>
-                <ul className='flex'>
+                <ul className='flex overflow-hidden w-full'>
                   {categoryNav}
                 </ul>     
 

@@ -18,20 +18,16 @@ export async function fetchSearch(searched) {
     return data; 
 }
 
-/*
-export async function fetchUser() {
-    let answer = await fetch('http://localhost:8080/api/user_logged');
-    console.log(answer)
+export async function fetchOneMovie(movieId, 
+    // credentials
+    ){
+    let answer = await fetch('http://localhost:8080/api/movies/' + movieId
+    // , credentials
+    );
     let data = await answer.json();
-    console.log(data)
-    
+ 
     return data; 
 }
-*/
-
-
-
-
 
 export async function fetchCategoryData(catId) {
     let globalData = await fetchAllMoviesData()

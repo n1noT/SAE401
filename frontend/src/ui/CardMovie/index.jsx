@@ -28,8 +28,8 @@ const card = cva(base, {
       ],
     },
     size: {
-      small: ["pt-[56.25%] relative"],
-      big: ["pt-[133.33%] relative"],
+      small: ["relative"],
+      big: ["relative"],
 
     },
   },
@@ -43,12 +43,12 @@ const card = cva(base, {
 export default function Card({ title, bgImage, channelImage, size }) {
   return <>
     
-      <div className="block w-56">
+      <div className="w-full">
             <div className={card({ size})}>
               <div className="bg-top bg-no-repeat bg-cover rounded-sm block z-10 ">
                 <picture >
-                  <source srcSet={bgImage} className=" w-full h-full bg-top bg-no-repeat bg-cover rounded-sm z-10" />
-                  <img src={bgImage} alt={title} className="absolute top-0 left-0 w-full h-full bg-top bg-no-repeat bg-cover rounded-sm z-10"/>
+                  <source srcSet={bgImage} className=" w-full bg-top bg-no-repeat bg-cover rounded-sm z-10" />
+                  <img src={bgImage} alt={title} className=" w-full bg-top bg-no-repeat bg-cover rounded-sm z-10"/>
                 </picture>
               </div>
               <div className="absolute top-0 left-0 h-full rounded-sm z-30">

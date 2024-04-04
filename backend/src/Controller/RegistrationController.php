@@ -34,10 +34,12 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
+            $role= json_encode($user->getRoles());
+
             // Créer un nouveau cookie
-            $cookieId = new Cookie(
-                'user_id',          // Nom du cookie
-                $user->getId(),     // Valeur du cookie
+            $cookieRole= new Cookie(
+                'user_role',          // Nom du cookie
+                $role,     // Valeur du cookie
                 time() + 3600 * 24 *7, // Date d'expiration du cookie 
                 '/',                // Chemin du cookie 
                 null,               // Domaine du cookie 
@@ -48,7 +50,7 @@ class RegistrationController extends AbstractController
             $cookieEmail = new Cookie('user_email', $user->getEmail(), time() + (3600 * 24), '/', '', false, false);
 
             $response = new RedirectResponse('http://localhost:8090/connected');
-            $response->headers->setCookie($cookieId);
+            $response->headers->setCookie($cookieRole);
             $response->headers->setCookie($cookieEmail);
             
         

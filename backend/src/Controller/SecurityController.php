@@ -38,12 +38,14 @@ class SecurityController extends AbstractController
         if ($this->isGranted('ROLE_USER')) {
             $user = $token->getUser();
 
-            $cookieId = new Cookie('user_id', $user->getId(), time() + (3600 * 24), '/', '', false, false);
+            $role= json_encode($user->getRoles());
+
+            $cookieRole = new Cookie('user_id', $role, time() + (3600 * 24), '/', '', false, false);
             $cookieEmail = new Cookie('user_email', $user->getEmail(), time() + (3600 * 24), '/', '', false, false);
 
             // Créer une réponse de redirection avec le cookie
             $response = new RedirectResponse('http://localhost:8090/connected');
-            $response->headers->setCookie($cookieId);
+            $response->headers->setCookie($cookieRole);
             $response->headers->setCookie($cookieEmail);
 
             return $response;
@@ -65,7 +67,7 @@ class SecurityController extends AbstractController
     {
         
         $response = new RedirectResponse('http://localhost:8090/');
-        $response->headers->clearCookie('user_id');
+        $response->headers->clearCookie('user_role');
         $response->headers->clearCookie('user_email');
 
         return $response;

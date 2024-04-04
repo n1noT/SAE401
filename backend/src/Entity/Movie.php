@@ -29,6 +29,9 @@ class Movie
     #[ORM\Column(length: 255)]
     private ?string $urlImage = null;
 
+    #[ORM\Column(length: 500)]
+    private ?string $trailer = null;
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
@@ -83,6 +86,18 @@ class Movie
     public function setUrlImage(string $urlImage): static
     {
         $this->urlImage = $urlImage;
+
+        return $this;
+    }
+
+    public function getTrailer(): ?string
+    {
+        return $this->trailer;
+    }
+
+    public function setTrailer(string $trailer): static
+    {
+        $this->trailer = $trailer;
 
         return $this;
     }

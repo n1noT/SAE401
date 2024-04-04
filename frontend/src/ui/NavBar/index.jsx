@@ -40,7 +40,7 @@ export default function NavBar({nav}) {
 
   return (
 
-<nav className="flex border-b-2 border-button-secondary-bg w-full px-4 justify-between flex-col md:flex-row">
+<nav className="flex border-b-2 border-button-secondary-bg w-full p-1 md:px-4 justify-between flex-col md:flex-row">
   <div className='flex'>
     <Link to="/" className='flex justify-center items-center'>
       <img src="/assets/images/big_logo_canal.svg" className='w-32 object-contain '/>
@@ -49,7 +49,7 @@ export default function NavBar({nav}) {
         {navElements}
       </ul>
   </div>
-    <div className="flex justify-center items-center p-2 gap-4" >
+    <div className="flex gap-2 justify-center items-center md:p-2 md:gap-4" >
         <SearchBar/>    
 
         <Link to="http://localhost:8080/register">
@@ -58,7 +58,7 @@ export default function NavBar({nav}) {
           </Button>
         </Link> 
         
-          <button className='w-8 h-8 bg-login-bg p-2 rounded-full group relative'>
+          <button className='min-w-8 h-8 bg-login-bg p-2 rounded-full group relative'>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2.1 0 19.244 17.172" >
               <path d="M7.522.001a4.496 4.496 0 1 1 .001 8.995A4.496 4.496 0 0 1 7.522 0m-8.565 17.172c-.88 0-1.364-1.004-.841-1.712 2.13-2.88 5.547-4.753 9.406-4.753s7.275 1.872 9.406 4.753c.523.708.04 1.712-.841 1.712z" ></path>
               </svg>
