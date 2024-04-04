@@ -2,8 +2,8 @@ import Navbar from '../ui/NavBar'
 import { Outlet } from 'react-router-dom';
 import { useLoaderData } from "react-router-dom";
 import { fetchNavbar} from "../lib/loaders.js";
-
-
+import { Suspense } from 'react';
+import Loading from '../ui/Loading';
 
  
 
@@ -24,8 +24,9 @@ export default function Root() {
     <>
       <section className='bg-main-bg min-h-screen'>
         <Navbar nav={dataName.nav}/>
-        
-        <Outlet />
+        <Suspense fallback={<Loading/>}>
+          <Outlet />
+        </Suspense>
       </section>
     </>
   );

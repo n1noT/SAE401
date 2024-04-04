@@ -1,10 +1,12 @@
 
 import NavButton from '../ui/NavBar/Button.jsx';
+import Loading from '../ui/Loading';
 import { Outlet, useLoaderData, defer, Await } from "react-router-dom";
 import { fetchAllMoviesData, fetchAllCategoriesData, fetchNavbar} from "../lib/loaders.js";
 
 import {moviesContext}  from '../context/moviesContext.jsx';
 import {categoriesContext}  from '../context/categoriesContext.jsx';
+import { Suspense } from 'react';
 
 
 
@@ -38,6 +40,8 @@ export async function loader(){
     
     return (
       <>
+
+      <Suspense fallback={<Loading/>}>
         <categoriesContext.Provider value={data.categories}>
           <moviesContext.Provider value={data.movies}>
               <section className='p-8'>
@@ -50,6 +54,7 @@ export async function loader(){
               </section>
           </moviesContext.Provider>
         </categoriesContext.Provider>
+        </Suspense>
       </>
       
     )

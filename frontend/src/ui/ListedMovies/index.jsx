@@ -14,7 +14,7 @@ export default function ListedMovies ({data}){
         let imageBox = '/assets/images/'+mov.urlImage;
         
         return (
-            <li key={mov.id} className="block m-1 w-min">
+            <div key={mov.id} className="block m-1 w-min">
             <Link to={'/cinema/'+ mov.id}>
                 <Card
                 bgImage={imageBox}
@@ -24,7 +24,7 @@ export default function ListedMovies ({data}){
                 />
                 <TitleContent name={mov.name} category={mov.category[0].name} content='Film'/>
             </Link>
-            </li>
+            </div>
         );
         }
         }
@@ -37,15 +37,21 @@ export default function ListedMovies ({data}){
         <li className='mt-8 '>
             <h3 className='text-clr-T-base font-button-secondary text-2xl font-bold m-1'>{category.name}</h3>
             <ul className="flex ">
-                {moviesList}
+                
+                    {moviesList}
+                
             </ul>
         </li>
     )
     }
 
     return(
-        <ul className='w-full'>
-            {categoryList}
+        
+        <ul className='w-screen overflow-hidden'>
+            
+                {categoryList} 
+
+            
         </ul>
     )
 }

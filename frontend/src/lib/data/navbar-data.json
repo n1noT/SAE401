@@ -1,10 +1,6 @@
 {
     "main": [
-        {
-            "link": "creations",
-            "intent": "main",
-            "name": "Nos Créations"
-        },
+        
         {
             "link": "cinema/accueil",
             "intent": "main",
@@ -20,16 +16,7 @@
             "intent": "main",
             "name": "Sport"
         },
-        {
-            "link": "docs",
-            "intent": "main",
-            "name": "Docs"
-        },
-        {
-            "link": "jeunesse",
-            "intent": "main",
-            "name": "Jeunesse"
-        },
+        
         {
             "link": "chaines",
             "intent": "main",
