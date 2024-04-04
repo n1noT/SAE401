@@ -18,12 +18,16 @@ export async function fetchSearch(searched) {
     return data; 
 }
 
+/*
 export async function fetchUser() {
-    let answer = await fetch('http://localhost:8080/login');
+    let answer = await fetch('http://localhost:8080/api/user_logged');
+    console.log(answer)
     let data = await answer.json();
     console.log(data)
+    
     return data; 
 }
+*/
 
 
 

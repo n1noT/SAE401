@@ -12,6 +12,8 @@ use App\Repository\MovieRepository;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Cookie;
+
 
 class ApiController extends AbstractController
 {
@@ -98,10 +100,27 @@ class ApiController extends AbstractController
         return $response;
     }
 
-    #[Route('/api/user_loged', name: 'app_api_user', methods:['GET'])]
-    public function readAllCategory( SerializerInterface $serializer ): Response
+    #[Route('/api/user_logged', name: 'app_api_user', methods:['GET'])]
+    public function user_logged(SerializerInterface $serializer): Response
     {
         $user = $this->getUser();
+
+        // Créer un nouveau cookie
+        $cookie = new Cookie(
+            'user_id',          // Nom du cookie
+            $user,     // Valeur du cookie, ici j'ai supposé que vous avez une méthode getId() sur votre entité User
+            time() + 3600 * 24 *7, // Date d'expiration du cookie (ici, 24 heures)
+            '/',                // Chemin du cookie (racine du site dans ce cas)
+            null,               // Domaine du cookie (null pour le domaine actuel)
+            false,              // Secure (true si vous souhaitez que le cookie soit transmis uniquement via HTTPS)
+            false                // HttpOnly (true si vous ne voulez pas que JavaScript puisse accéder au cookie)
+        );
+
+        $response = new Response();
+        $response->headers->setCookie($cookie);
+       
+        
+        return $response;
     }
 
     

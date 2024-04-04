@@ -6,16 +6,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use App\Entity\User;
+use App\Form\LoginFormType;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class SecurityController extends AbstractController
 {
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // get the login error if there is one
+
+        // // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
 
-        // last username entered by the user
+        // // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('security/login.html.twig', [
@@ -24,62 +32,24 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    #[Route(path: '/logout', name: 'app_logout')]
-    public function logout(): void
+    #[Route(path: '/logged', name: 'app_logged')]
+    public function logged(TokenInterface $token): Response
     {
-        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
-    }
-}
+        if ($this->isGranted('ROLE_USER')) {
+            $user = $token->getUser();
 
+            $cookie = new Cookie('user_id', $user->getId(), time() + (3600 * 24), '/', '', false, false);
 
+            // Créer une réponse de redirection avec le cookie
+            $response = new RedirectResponse('http://localhost:8090/connected');
+            $response->headers->setCookie($cookie);
 
-/*
-namespace App\Controller;
-
-use App\Repository\UserRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\Routing\Attribute\Route;
-use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
-
-class SecurityController extends AbstractController
-{
-    private $jwtManager;
-
-    public function __construct(JWTTokenManagerInterface $jwtManager)
-    {
-        $this->jwtManager = $jwtManager;
-    }
-
-    #[Route(path: '/login', name: 'app_login_user')]
-    public function login(Request $request, AuthenticationUtils $authenticationUtils,  UserPasswordHasherInterface $userPasswordHasher ,UserRepository $userRep): Response
-    {
-        // Récupérez les informations d'identification de la demande
-        $username = $request->request->get('username');
-        $password = $request->request->get('password');
-
-        $user = $userRep->findOneBySomeEmail($username);
-        
-        return new JsonResponse(['username' => [$user]]);
-        
-        $hashedPassword = $userPasswordHasher->hashPassword($user, $password);
-
-        if (!$user || !password_verify($hashedPassword, $user->getPassword())) {
-            // Si les informations d'identification sont invalides, retournez une réponse d'erreur
-            return $this->json(['message' => 'Identifiants invalides'], 401);
+            return $response;
         }
 
-        // Générez le jeton JWT pour l'utilisateur
-        $token = $this->jwtManager->create($user);
+        $response = new RedirectResponse('http://localhost:8080/login');
 
-        // Retournez le jeton JWT comme réponse à la demande de connexion
-        return $this->json(['token' => $token]);
-        
+        return $response;
     }
 
     #[Route(path: '/logout', name: 'app_logout')]
@@ -88,4 +58,6 @@ class SecurityController extends AbstractController
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 }
-*/
+
+
+

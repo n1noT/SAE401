@@ -51,9 +51,10 @@ const router = createBrowserRouter([
         loader: searchLoader
       },
       {
-        path: 'login',
+        path: 'connected',
         element: <LogPage />,
-      
+        
+        
       },
       
     ],

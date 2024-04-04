@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\Cookie;
 
 class RegistrationController extends AbstractController
 {
@@ -33,14 +34,23 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // do anything else you need here, like send an email
-            $referer = $request->headers->get('referer');
-            if($referer == 'http://localhost:8080/register'){
-                return new RedirectResponse('http://localhost:8090');
-            }
-            else{
-                return new RedirectResponse($referer);
-            }
+            // Créer un nouveau cookie
+            $cookie = new Cookie(
+                'user_id',          // Nom du cookie
+                $user->getId(),     // Valeur du cookie
+                time() + 3600 * 24 *7, // Date d'expiration du cookie 
+                '/',                // Chemin du cookie 
+                null,               // Domaine du cookie 
+                false,              // Secure (true si vous souhaitez que le cookie soit transmis uniquement via HTTPS)
+                false               // HttpOnly (true si vous ne voulez pas que JavaScript puisse accéder au cookie)
+            );
+
+            $response = new RedirectResponse('http://localhost:8090/connected');
+            $response->headers->setCookie($cookie);
+        
+            
+            return $response;
+    
 
         }
 
