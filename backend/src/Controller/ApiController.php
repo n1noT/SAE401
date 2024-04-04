@@ -17,11 +17,7 @@ use Symfony\Component\HttpFoundation\Cookie;
 
 class ApiController extends AbstractController
 {
-    #[Route('/api/registered/', name: 'app_api_registered')]
-    public function registered(): Response
-    {
-        return dd('USER REGISTERED !');
-    }
+    
 
     #[Route('/api/movies', name: 'app_api_all_movies', methods:['GET'])]
     public function readAllMovies(MovieRepository $mov, SerializerInterface $serializer ): Response

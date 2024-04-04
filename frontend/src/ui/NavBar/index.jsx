@@ -2,6 +2,9 @@ import SearchBar from '../SearchBar';
 import NavButton from './Button';
 import Button from '../Button';
 import {Link} from 'react-router-dom'
+import { getCookie } from '../../lib/utils';
+
+
 
 
 export default function NavBar({nav}) {
@@ -17,6 +20,23 @@ export default function NavBar({nav}) {
       </li>
     );
   });
+
+  let cookie = getCookie('user_id')
+
+  let titleConnex= '';
+  let linkButton = '';
+  let fillButton = '';
+
+  if(cookie){  
+    titleConnex= 'Compte Canal+';
+    linkButton = 'logout';
+    fillButton =  'Se déconnecter';
+  }
+  else{
+    titleConnex= 'Bienvenue sur Canal+';
+    linkButton = 'login';
+    fillButton = 'Se connecter';
+  }
 
   return (
 
@@ -37,13 +57,28 @@ export default function NavBar({nav}) {
             <span>S'abonner</span>
           </Button>
         </Link> 
-        <Link to="http://localhost:8080/login">
-          <button className='w-8 h-8 bg-login-bg p-2 rounded-full'>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2.1 0 19.244 17.172">
+        
+          <button className='w-8 h-8 bg-login-bg p-2 rounded-full group relative'>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2.1 0 19.244 17.172" >
               <path d="M7.522.001a4.496 4.496 0 1 1 .001 8.995A4.496 4.496 0 0 1 7.522 0m-8.565 17.172c-.88 0-1.364-1.004-.841-1.712 2.13-2.88 5.547-4.753 9.406-4.753s7.275 1.872 9.406 4.753c.523.708.04 1.712-.841 1.712z"></path>
               </svg>
+              <div className='absolute top-6 group-hover:inline-block hidden right-0 '>
+                <div className='p-5 pr-0'>
+                  <div className=' bg-secondary-bg w-56 flex justify-center items-center p-4 rounded-md flex-col gap-2'>
+                    <h3 className='font-button-secondary text-clr-T-base'>{titleConnex}</h3>
+                      <Link to={"http://localhost:8080/" + linkButton}>
+                          <Button intent="primary" className="rounded-sm">
+                            <span>{fillButton}</span>
+                          </Button>
+                      </Link> 
+                    
+                  </div>
+                </div>
+                
+                
+              </div>
           </button>
-        </Link> 
+        
     </div>
 
 </nav>

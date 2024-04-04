@@ -7,6 +7,7 @@ export default {
       colors:{
         'clr-T-base' : "var(--text-base)",
         'main-bg' : "var(--global-bg)",
+        'secondary-bg' : "var(--secondary-bg)",
         'login-bg' : "var(--login-bg)",
         'button-bg' : "var(--button-bg)",
         'button-text' : "var(--button-text)",

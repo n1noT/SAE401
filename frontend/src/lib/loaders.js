@@ -31,6 +31,8 @@ export async function fetchUser() {
 
 
 
+
+
 export async function fetchCategoryData(catId) {
     let globalData = await fetchAllMoviesData()
     let catData = []

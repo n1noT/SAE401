@@ -38,11 +38,13 @@ class SecurityController extends AbstractController
         if ($this->isGranted('ROLE_USER')) {
             $user = $token->getUser();
 
-            $cookie = new Cookie('user_id', $user->getId(), time() + (3600 * 24), '/', '', false, false);
+            $cookieId = new Cookie('user_id', $user->getId(), time() + (3600 * 24), '/', '', false, false);
+            $cookieEmail = new Cookie('user_email', $user->getEmail(), time() + (3600 * 24), '/', '', false, false);
 
             // Créer une réponse de redirection avec le cookie
             $response = new RedirectResponse('http://localhost:8090/connected');
-            $response->headers->setCookie($cookie);
+            $response->headers->setCookie($cookieId);
+            $response->headers->setCookie($cookieEmail);
 
             return $response;
         }
@@ -56,6 +58,18 @@ class SecurityController extends AbstractController
     public function logout(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
+
+    #[Route(path: '/logged_out', name: 'app_logged_out')]
+    public function loggedOut(): Response
+    {
+        
+        $response = new RedirectResponse('http://localhost:8090/');
+        $response->headers->clearCookie('user_id');
+        $response->headers->clearCookie('user_email');
+
+        return $response;
+         
     }
 }
 

@@ -1,6 +1,6 @@
 
 import NavButton from '../ui/NavBar/Button.jsx';
-import { Outlet, useLoaderData } from "react-router-dom";
+import { Outlet, useLoaderData, defer, Await } from "react-router-dom";
 import { fetchAllMoviesData, fetchAllCategoriesData, fetchNavbar} from "../lib/loaders.js";
 
 import {moviesContext}  from '../context/moviesContext.jsx';
@@ -12,7 +12,7 @@ export async function loader(){
      let moviesData = await fetchAllMoviesData();
      let catData = await fetchAllCategoriesData();
 
-     return {movies : moviesData, categories : catData};
+     return defer({movies : moviesData, categories : catData});
 }
   
   export default function Cinema() {

@@ -35,7 +35,7 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
 
             // Créer un nouveau cookie
-            $cookie = new Cookie(
+            $cookieId = new Cookie(
                 'user_id',          // Nom du cookie
                 $user->getId(),     // Valeur du cookie
                 time() + 3600 * 24 *7, // Date d'expiration du cookie 
@@ -45,8 +45,12 @@ class RegistrationController extends AbstractController
                 false               // HttpOnly (true si vous ne voulez pas que JavaScript puisse accéder au cookie)
             );
 
+            $cookieEmail = new Cookie('user_email', $user->getEmail(), time() + (3600 * 24), '/', '', false, false);
+
             $response = new RedirectResponse('http://localhost:8090/connected');
-            $response->headers->setCookie($cookie);
+            $response->headers->setCookie($cookieId);
+            $response->headers->setCookie($cookieEmail);
+            
         
             
             return $response;

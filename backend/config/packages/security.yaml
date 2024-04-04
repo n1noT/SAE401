@@ -23,8 +23,7 @@ security:
                 default_target_path: http://localhost:8080/logged  # spécifiez votre URL de front-end ici
             logout:
                 path: app_logout
-                # where to redirect after logout
-                # target: app_any_route
+                target: http://localhost:8080/logged_out
 
 
             # activate different ways to authenticate
