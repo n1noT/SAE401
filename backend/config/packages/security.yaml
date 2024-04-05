@@ -20,10 +20,10 @@ security:
                 login_path: app_login
                 check_path: app_login
                 enable_csrf: true
-                default_target_path: http://localhost:8080/logged  
+                default_target_path: app_logged  
             logout:
                 path: app_logout
-                target: http://localhost:8080/logged_out
+                target: app_logged_out
             json_login:
                 check_path: api_login
 

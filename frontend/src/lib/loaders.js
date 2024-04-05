@@ -1,3 +1,5 @@
+import { getCookie } from "./utils";
+
 export async function fetchAllMoviesData() {
     let answer = await fetch('http://localhost:8080/api/movies');
     let data = await answer.json();
@@ -19,20 +21,19 @@ export async function fetchSearch(searched) {
 }
 
 export async function fetchOneMovie(movieId){
-    let answer = await fetch('http://localhost:8080/api/movie/' + movieId, { credentials:'include', redirect: 'follow'});
-        
-        // Vérifier si la réponse est une redirection
-        if (answer.redirected) {
-            // Si la réponse est une redirection, récupérer l'URL de redirection
-            const redirectUrl = answer.url;
-            // Rediriger vers l'URL de redirection
-            window.location.href = redirectUrl;
-            return; // Arrêter l'exécution de la fonction
-        }
+    let user = getCookie('email');
 
-        // Si ce n'est pas une redirection, traiter la réponse comme d'habitude
+    if(user){
+        let answer = await fetch('http://localhost:8080/api/movie/' + movieId, { credentials:'include'});
+
         const responseData = await answer.json();
         return responseData;
+
+    }
+    else{
+        window.location.href = 'http://localhost:8080/login'
+    }
+
 
 }
 

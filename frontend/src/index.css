@@ -33,7 +33,7 @@
         --text-base: var(--color-white);
         
         --global-bg: var(--color-black) ;
-        --secondary-bg: var(--color-grey) ;
+        --secondary-bg: var(--color-grey-secondary) ;
         --login-bg: var(--color-white) ;
         --button-bg: var(--color-amaranth) ;
         --button-text: var(--text-base) ;

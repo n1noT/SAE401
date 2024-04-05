@@ -19,21 +19,8 @@ export default function Movie(){
 
     let movie = useLoaderData();
 
-    let user = getCookie('user_role');
-    let fillButtonContent = '';
-    let fillButtonLink = '';
-
-    if(user){
-        fillButtonContent = 'Lecture';
-        fillButtonLink = movie.trailer;
-    }
-    else{
-        fillButtonContent = 'S\'abonner';
-        fillButtonLink = 'http://localhost:8080/register';
-    }
-
     return(
-        <SeeMovie buttonContent={fillButtonContent} linkContent={fillButtonLink} movie={movie}/>
+        <SeeMovie buttonContent={'Lecture'} linkContent={movie.trailer} movie={movie}/>
     )
     
 }
