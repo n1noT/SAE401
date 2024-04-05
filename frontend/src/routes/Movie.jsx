@@ -11,7 +11,7 @@ export async function loader({params}){
         , user
         );
     
-    return movieData;
+    return {data: movieData, id: params.idmovie};
 }
  
 
@@ -20,7 +20,7 @@ export default function Movie(){
     let movie = useLoaderData();
 
     return(
-        <SeeMovie buttonContent={'Lecture'} linkContent={movie.trailer} movie={movie}/>
+        <SeeMovie buttonContent={'Lecture'} linkContent={movie.data.trailer} movie={movie.data} idmovie={movie.id}/>
     )
     
 }

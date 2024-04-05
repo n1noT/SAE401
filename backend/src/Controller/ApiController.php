@@ -14,6 +14,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Cookie;
 use App\Entity\User;
+use App\Entity\Playlist;
+use App\Repository\PlaylistRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
@@ -105,6 +108,50 @@ class ApiController extends AbstractController
        
         
         return $response;
+    }
+
+    #[Route('/api/playlist', name: 'app_api_playlist', methods:['GET'])]
+    public function readPlaylist(#[CurrentUser] ?User $user, PlaylistRepository $play, SerializerInterface $serializer ): Response
+    {
+        $userId = $user->getId();
+        $data = $serializer->normalize($play->findByUserId($userId), null, ['groups' => 'json_movie']);
+
+        $response = new JsonResponse( $data );
+        return $response;
+       
+        
+    }
+
+    #[Route('/api/playlist/add/{id}', name: 'app_api_playlist_add', requirements: ['id' => '\d+'])]
+    public function addPlaylist(#[CurrentUser] ?User $user, Movie $mov ,EntityManagerInterface $entityManager, PlaylistRepository $play): Response
+    {
+        // Vérifie si l'utilisateur est connecté
+        if (!$user) {
+            return new Response('Unauthorized', Response::HTTP_UNAUTHORIZED);
+        }
+
+        $check = $play->findByUserAndMovie($user->getId(), $mov->getId());
+
+        if($check == null){
+            // Crée une nouvelle entrée dans la table Playlist avec les ID de l'utilisateur et du film
+            $playlistEntry = new Playlist();
+            $playlistEntry->setUser($user);
+            $playlistEntry->setMovie($mov);
+
+            // Persiste l'entité Playlist
+            $entityManager->persist($playlistEntry);
+
+            // Enregistre les modifications dans la base de données
+            $entityManager->flush();
+
+            // Répond avec un message de succès
+            return new Response('Film ajouté à la playlist avec succès', Response::HTTP_OK);
+        }
+        else{
+            return new Response('Le film est déjà dans la playlist ', Response::HTTP_OK);
+        }
+
+        
     }
 
     

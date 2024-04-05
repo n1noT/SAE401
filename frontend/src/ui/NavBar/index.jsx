@@ -3,6 +3,7 @@ import NavButton from './Button';
 import Button from '../Button';
 import {Link} from 'react-router-dom'
 import { getCookie } from '../../lib/utils';
+import Playlist from '../../routes/Playlist';
 
 
 
@@ -26,16 +27,25 @@ export default function NavBar({nav}) {
   let titleConnex= '';
   let linkButton = '';
   let fillButton = '';
+  let maPlaylistLink = null
 
   if(cookie){  
     titleConnex= 'Compte Canal+';
     linkButton = 'logout';
     fillButton =  'Se déconnecter';
+    maPlaylistLink = (
+      <Link to="http://localhost:8090/playlist">
+        <Button intent="secondary" className="rounded-sm">
+          <span>Ma playlist</span>
+        </Button>
+      </Link>
+    );
   }
   else{
     titleConnex= 'Bienvenue sur Canal+';
     linkButton = 'login';
     fillButton = 'Se connecter';
+    
   }
 
   return (
@@ -71,11 +81,7 @@ export default function NavBar({nav}) {
                             <span>{fillButton}</span>
                           </Button>
                       </Link> 
-                      <Link to={"http://localhost:8090/playlist"}>
-                          <Button intent="secondary" className="rounded-sm">
-                            <span>Ma playlist</span>
-                          </Button>
-                      </Link> 
+                      {maPlaylistLink}
                     
                   </div>
                 </div>

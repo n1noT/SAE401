@@ -37,6 +37,24 @@ export async function fetchOneMovie(movieId){
 
 }
 
+export async function fetchPlaylist(){
+    let user = getCookie('email');
+
+    if(user){
+        let answer = await fetch('http://localhost:8080/api/playlist', { credentials:'include'});
+
+        const responseData = await answer.json();
+        console.log(responseData)
+        return responseData;
+
+    }
+    else{
+        window.location.href = 'http://localhost:8080/login'
+    }
+
+
+}
+
 export async function fetchCategoryData(catId) {
     let globalData = await fetchAllMoviesData()
     let catData = []

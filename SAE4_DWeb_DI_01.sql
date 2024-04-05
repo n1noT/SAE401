@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : mysql
--- Généré le : jeu. 04 avr. 2024 à 17:55
+-- Généré le : ven. 05 avr. 2024 à 17:00
 -- Version du serveur : 8.3.0
 -- Version de PHP : 8.2.8
 
@@ -62,7 +62,10 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 ('DoctrineMigrations\\Version20240315102911', '2024-03-18 14:18:00', 407),
 ('DoctrineMigrations\\Version20240315134656', '2024-03-18 14:18:01', 37),
 ('DoctrineMigrations\\Version20240325081620', '2024-03-25 08:16:31', 150),
-('DoctrineMigrations\\Version20240404160636', '2024-04-04 16:07:19', 141);
+('DoctrineMigrations\\Version20240404160636', '2024-04-04 16:07:19', 141),
+('DoctrineMigrations\\Version20240405151145', '2024-04-05 15:12:44', 291),
+('DoctrineMigrations\\Version20240405152450', '2024-04-05 15:25:21', 140),
+('DoctrineMigrations\\Version20240405153030', '2024-04-05 15:30:51', 411);
 
 -- --------------------------------------------------------
 
@@ -158,6 +161,31 @@ INSERT INTO `movie_category` (`movie_id`, `category_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `playlist`
+--
+
+CREATE TABLE `playlist` (
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `movie_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `playlist`
+--
+
+INSERT INTO `playlist` (`id`, `user_id`, `movie_id`) VALUES
+(1, 12, 16),
+(2, 12, 14),
+(3, 13, 22),
+(4, 13, 16),
+(5, 13, 7),
+(6, 13, 2),
+(13, 13, 8);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `user`
 --
 
@@ -174,7 +202,6 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `email`, `roles`, `password`) VALUES
 (1, 'george.abitbol@mail.com', '[\"ROLE_USER\", \"ROLE_ADMIN\"]', '$2y$13$/Aoy550Fh3qi7k3CiJc2cefTh3PfhdQG9LbTE.GgMM/tgVTUq3tYW'),
-(10, 'freeze.c@gmail.com', '[]', '$2y$13$hNgCO2HkUFlDKwQUQuibM.MDojwqF3jeCsC6kKgxapQRdOWRRCWjS'),
 (11, 'nouveau@mail.com', '[]', '$2y$13$tF8yJEPeBOqZCeH3.EvAZu2lJPqxjwM4N1RNB8B4nCvs6oWL79hx2'),
 (12, 'amiibo@gmail.com', '[]', '$2y$13$80H.rwKecDL.gToWvakX.Obf0dOi7qcrNsw2DQBSctqGnMFplFKEq'),
 (13, 'legostore@gmail.com', '[]', '$2y$13$HDTy8VIwOY6j7VZW1LedCOO/sHq.JMc9kRJaLeEI1NE3vsBclBxgK');
@@ -210,6 +237,14 @@ ALTER TABLE `movie_category`
   ADD KEY `IDX_DABA824C12469DE2` (`category_id`);
 
 --
+-- Index pour la table `playlist`
+--
+ALTER TABLE `playlist`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_D782112DA76ED395` (`user_id`),
+  ADD KEY `IDX_D782112D8F93B6FC` (`movie_id`);
+
+--
 -- Index pour la table `user`
 --
 ALTER TABLE `user`
@@ -233,6 +268,12 @@ ALTER TABLE `movie`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
+-- AUTO_INCREMENT pour la table `playlist`
+--
+ALTER TABLE `playlist`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
@@ -248,6 +289,13 @@ ALTER TABLE `user`
 ALTER TABLE `movie_category`
   ADD CONSTRAINT `FK_DABA824C12469DE2` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_DABA824C8F93B6FC` FOREIGN KEY (`movie_id`) REFERENCES `movie` (`id`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `playlist`
+--
+ALTER TABLE `playlist`
+  ADD CONSTRAINT `FK_D782112D8F93B6FC` FOREIGN KEY (`movie_id`) REFERENCES `movie` (`id`),
+  ADD CONSTRAINT `FK_D782112DA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

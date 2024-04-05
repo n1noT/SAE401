@@ -8,6 +8,7 @@ import About from './routes/about.jsx';
 import ErrorPage from './ui/ErrorPage';
 import Cinema , {loader as moviesLoader} from './routes/Cinema.jsx';
 import Movie , {loader as movieInfoLoader} from './routes/Movie.jsx';
+import Playlist, {loader as playlistLoader} from './routes/Playlist.jsx';
 import AccueilCinema from './routes/AccueilCinema.jsx';
 import Genre from './routes/Genre.jsx';
 import DesignSystem from './routes/designSystem.jsx';
@@ -45,6 +46,11 @@ const router = createBrowserRouter([
         path: 'movie/:idmovie',
         element: <Movie/>,
         loader: movieInfoLoader,
+      },
+      ,{
+        path: 'playlist',
+        element: <Playlist/>,
+        loader: playlistLoader,
       },
       {
         path: 'design-system',
