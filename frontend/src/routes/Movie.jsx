@@ -6,9 +6,9 @@ import SeeMovie from "../ui/SeeMovie";
 
 
 export async function loader({params}){
-    let user = getCookie('user_role');
+    let user = getCookie('email');
     let movieData = await fetchOneMovie(params.idmovie
-        // , user
+        , user
         );
     
     return movieData;

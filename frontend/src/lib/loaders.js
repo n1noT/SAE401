@@ -18,15 +18,22 @@ export async function fetchSearch(searched) {
     return data; 
 }
 
-export async function fetchOneMovie(movieId, 
-    // credentials
-    ){
-    let answer = await fetch('http://localhost:8080/api/movies/' + movieId
-    // , credentials
-    );
-    let data = await answer.json();
- 
-    return data; 
+export async function fetchOneMovie(movieId){
+    let answer = await fetch('http://localhost:8080/api/movie/' + movieId, { credentials:'include', redirect: 'follow'});
+        
+        // Vérifier si la réponse est une redirection
+        if (answer.redirected) {
+            // Si la réponse est une redirection, récupérer l'URL de redirection
+            const redirectUrl = answer.url;
+            // Rediriger vers l'URL de redirection
+            window.location.href = redirectUrl;
+            return; // Arrêter l'exécution de la fonction
+        }
+
+        // Si ce n'est pas une redirection, traiter la réponse comme d'habitude
+        const responseData = await answer.json();
+        return responseData;
+
 }
 
 export async function fetchCategoryData(catId) {

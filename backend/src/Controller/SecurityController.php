@@ -24,12 +24,21 @@ class SecurityController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
 
         // // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
+        if (isset($_COOKIE['email'])) {
+            $valeur_email = $_COOKIE['email'];
+            $lastUsername = $valeur_email;
+        }
+        else{
+            $lastUsername = $authenticationUtils->getLastUsername();
+            
+        }
 
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
         ]);
+
+        
     }
 
     #[Route(path: '/logged', name: 'app_logged')]
@@ -40,12 +49,14 @@ class SecurityController extends AbstractController
 
             $role= json_encode($user->getRoles());
 
-            $cookieRole = new Cookie('user_id', $role, time() + (3600 * 24), '/', '', false, false);
-            $cookieEmail = new Cookie('user_email', $user->getEmail(), time() + (3600 * 24), '/', '', false, false);
+            $cookieRole = new Cookie('user_role', $role, time() + (3600 * 24), '/', '', false, false);
+            $cookieId = new Cookie('user_id', $user->getId(), time() + (3600 * 24), '/', '', false, false);
+            $cookieEmail = new Cookie('email', $user->getUserIdentifier(), time() + (3600 * 24), '/', '', false, false);
 
             // Créer une réponse de redirection avec le cookie
             $response = new RedirectResponse('http://localhost:8090/connected');
             $response->headers->setCookie($cookieRole);
+            $response->headers->setCookie($cookieId);
             $response->headers->setCookie($cookieEmail);
 
             return $response;
@@ -68,7 +79,8 @@ class SecurityController extends AbstractController
         
         $response = new RedirectResponse('http://localhost:8090/');
         $response->headers->clearCookie('user_role');
-        $response->headers->clearCookie('user_email');
+        $response->headers->clearCookie('email');
+        $response->headers->clearCookie('user_id');
 
         return $response;
          

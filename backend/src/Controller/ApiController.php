@@ -13,7 +13,9 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Cookie;
-
+use App\Entity\User;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 class ApiController extends AbstractController
 {
@@ -22,12 +24,6 @@ class ApiController extends AbstractController
     #[Route('/api/movies', name: 'app_api_all_movies', methods:['GET'])]
     public function readAllMovies(MovieRepository $mov, SerializerInterface $serializer ): Response
     {
-        // $serializer est un service de Symfony injecté dans la méthode readMovie
-        // $data est la représentation serialisée/normalisée de l'entity $mov
-        // $data = $serializer->normalize(, null, ['groups' => 'json_movie']);
-        // $response est une instance de JsonResponse qui hérite de Response
-        // C'est la classe à utiliser lorsque l'on veut retourner du JSON
-        // $data sera automatiquement encodé en JSON
 
         $data = $serializer->normalize($mov->findAll(), null, ['groups' => 'json_movie']);
 
@@ -39,14 +35,11 @@ class ApiController extends AbstractController
     #[Route('/api/movies/searchContent', name: 'app_api_search_movie', methods:['GET'])]
     public function search(Request $request, MovieRepository $mov, SerializerInterface $serializer ): Response
     {
-        // $serializer est un service de Symfony injecté dans la méthode readMovie
-        // $data est la représentation serialisée/normalisée de l'entity $mov
+        
         $search = $request->query->get('search');
 
         $data = $serializer->normalize($mov->findLike($search), null, ['groups' => 'json_movie']);
-        // $response est une instance de JsonResponse qui hérite de Response
-        // C'est la classe à utiliser lorsque l'on veut retourner du JSON
-        // $data sera automatiquement encodé en JSON
+        
         
         
         $response = new JsonResponse( $data );
@@ -55,16 +48,14 @@ class ApiController extends AbstractController
         return $response;
     }
 
-     #[Route('/api/movies/{id}', name: 'app_api_movie', methods:['GET'], requirements: ['id' => '\d+'])]
-     public function readMovie(Movie $mov, SerializerInterface $serializer ): Response
+     #[Route('/api/movie/{id}', name: 'app_api_movie', methods:['GET'], requirements: ['id' => '\d+'])]
+     public function readMovie( Movie $mov, SerializerInterface $serializer ): Response
      {
 
-        // $serializer est un service de Symfony injecté dans la méthode readMovie
-        // $data est la représentation serialisée/normalisée de l'entity $mov
+    
+       
         $data = $serializer->normalize($mov, null, ['groups' => 'json_movie']);
-        // $response est une instance de JsonResponse qui hérite de Response
-        // C'est la classe à utiliser lorsque l'on veut retourner du JSON
-        // $data sera automatiquement encodé en JSON
+    
         $response = new JsonResponse( $data );
         return $response;
         
@@ -76,12 +67,9 @@ class ApiController extends AbstractController
     #[Route('/api/category/{id}', name: 'app_api_category', methods:['GET'])]
     public function readCategory(Category $cat, SerializerInterface $serializer ): Response
     {
-        // $serializer est un service de Symfony injecté dans la méthode readMovie
-        // $data est la représentation serialisée/normalisée de l'entity $mov
+    
         $data = $serializer->normalize($cat, null, ['groups' => 'json_category']);
-        // $response est une instance de JsonResponse qui hérite de Response
-        // C'est la classe à utiliser lorsque l'on veut retourner du JSON
-        // $data sera automatiquement encodé en JSON
+        
         $response = new JsonResponse( $data );
         return $response;
     }
@@ -89,18 +77,15 @@ class ApiController extends AbstractController
     #[Route('/api/categories', name: 'app_api_category', methods:['GET'])]
     public function readAllCategory(CategoryRepository $cat, SerializerInterface $serializer ): Response
     {
-        // $serializer est un service de Symfony injecté dans la méthode readMovie
-        // $data est la représentation serialisée/normalisée de l'entity $mov
+        
         $data = $serializer->normalize($cat->findAll(), null, ['groups' => 'json_category']);
-        // $response est une instance de JsonResponse qui hérite de Response
-        // C'est la classe à utiliser lorsque l'on veut retourner du JSON
-        // $data sera automatiquement encodé en JSON
+        
         $response = new JsonResponse( $data );
         return $response;
     }
 
     #[Route('/api/user_logged', name: 'app_api_user', methods:['GET'])]
-    public function user_logged(SerializerInterface $serializer): Response
+    public function user_logged(): Response
     {
         $user = $this->getUser();
 
@@ -121,6 +106,9 @@ class ApiController extends AbstractController
         
         return $response;
     }
+
+    
+  
 
     
 

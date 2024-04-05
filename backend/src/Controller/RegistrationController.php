@@ -47,11 +47,13 @@ class RegistrationController extends AbstractController
                 false               // HttpOnly (true si vous ne voulez pas que JavaScript puisse accéder au cookie)
             );
 
-            $cookieEmail = new Cookie('user_email', $user->getEmail(), time() + (3600 * 24), '/', '', false, false);
+            $cookieId = new Cookie('user_id', $user->getId(), time() + (3600 * 24), '/', '', false, false);
+            $cookieEmail = new Cookie('email', $user->getUserIdentifier(), time() + (3600 * 24), '/', '', false, false);
 
             $response = new RedirectResponse('http://localhost:8090/connected');
             $response->headers->setCookie($cookieRole);
             $response->headers->setCookie($cookieEmail);
+            $response->headers->setCookie($cookieId);
             
         
             
