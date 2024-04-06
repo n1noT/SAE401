@@ -52,7 +52,7 @@ export default function Card({ title, bgImage, channelImage, size }) {
                 </picture>
               </div>
               <div className="absolute top-0 left-0 h-full rounded-sm z-30">
-                <img src={channelImage} alt={title} className="absolute bottom-0 left-[0.1875rem] w-[3rem] h-[2.25rem] max-w-[3rem] z-30" />
+                <img src={channelImage} alt={title} className="absolute bottom-0  w-24 h-10 max-w-12 z-30" />
               </div>
             </div>
       </div>

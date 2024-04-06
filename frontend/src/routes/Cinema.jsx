@@ -1,9 +1,7 @@
-
 import NavButton from '../ui/NavBar/Button.jsx';
 import Loading from '../ui/Loading';
-import { Outlet, useLoaderData, defer, Await } from "react-router-dom";
-import { fetchAllMoviesData, fetchAllCategoriesData, fetchNavbar} from "../lib/loaders.js";
-
+import { Outlet, useLoaderData, defer } from "react-router-dom";
+import { fetchAllMoviesData, fetchAllCategoriesData} from "../lib/loaders.js";
 import {moviesContext}  from '../context/moviesContext.jsx';
 import {categoriesContext}  from '../context/categoriesContext.jsx';
 import { Suspense } from 'react';

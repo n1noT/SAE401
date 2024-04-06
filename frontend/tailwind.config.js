@@ -25,6 +25,9 @@ export default {
       },
       maxWidth:{
         'bar': '40rem'
+      },
+      backgroundImage: {
+        'card-bg' : 'var(--card-movie-bg)'
       }
     },
   },

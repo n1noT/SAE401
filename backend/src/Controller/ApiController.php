@@ -133,18 +133,15 @@ class ApiController extends AbstractController
         $check = $play->findByUserAndMovie($user->getId(), $mov->getId());
 
         if($check == null){
-            // Crée une nouvelle entrée dans la table Playlist avec les ID de l'utilisateur et du film
+
             $playlistEntry = new Playlist();
             $playlistEntry->setUser($user);
             $playlistEntry->setMovie($mov);
 
-            // Persiste l'entité Playlist
             $entityManager->persist($playlistEntry);
 
-            // Enregistre les modifications dans la base de données
             $entityManager->flush();
 
-            // Répond avec un message de succès
             return new Response('Film ajouté à la playlist avec succès', Response::HTTP_OK);
         }
         else{
@@ -153,6 +150,29 @@ class ApiController extends AbstractController
 
         
     }
+
+    #[Route('/api/playlist/remove/{id}', name: 'app_api_playlist_remove', requirements: ['id' => '\d+'])]
+    public function removePlaylist(#[CurrentUser] ?User $user, Movie $mov, EntityManagerInterface $entityManager, PlaylistRepository $play): Response
+    {
+        // Vérifie si l'utilisateur est connecté
+        if (!$user) {
+            return new Response('Unauthorized', Response::HTTP_UNAUTHORIZED);
+        }
+
+        $playlistEntry = $play->findByUserAndMovie($user->getId(), $mov->getId());
+
+        if ($playlistEntry) {
+  
+            $entityManager->remove($playlistEntry);
+  
+            $entityManager->flush();
+        
+            return new Response('Film retiré de la playlist avec succès', Response::HTTP_OK);
+        } else {
+            return new Response('Le film n\'est pas dans la playlist', Response::HTTP_OK);
+        }
+    }
+
 
     
   

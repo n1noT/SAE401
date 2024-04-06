@@ -5,12 +5,12 @@ import { fetchNavbar} from "../lib/loaders.js";
 import { Suspense } from 'react';
 import Loading from '../ui/Loading';
 
- 
 
 export async function loader(){
   let navbarData = await fetchNavbar('main');
+ 
+  return {nav: navbarData};
 
-  return {nav: navbarData };
 }
 
 
@@ -18,16 +18,14 @@ export default function Root() {
 
   const dataName = useLoaderData();
 
-
-
   return (
     <>
-      <section className='bg-main-bg min-h-screen'>
-        <Navbar nav={dataName.nav}/>
-        <Suspense fallback={<Loading/>}>
-          <Outlet />
-        </Suspense>
-      </section>
+        <section className='bg-main-bg min-h-screen'>
+          <Navbar nav={dataName.nav}/>
+          <Suspense fallback={<Loading/>}>
+            <Outlet />
+          </Suspense>
+        </section>
     </>
   );
 }

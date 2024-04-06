@@ -13,8 +13,7 @@ const btnType = cva(base, {
             ],
             secondary: [
                 "focus:border-b-2 focus:border-button-bg"
-                // Mettre la bordure en after 
-                // Changer le focus ?
+                
       ],
     },
   },

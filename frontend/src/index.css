@@ -28,6 +28,7 @@
         --color-dark-grey: #242424;
         --color-white : #f5f5f5;
         --color-black : #0e0e0e;
+        --gradient-black : linear-gradient(180deg, rgba(255,255,255,0) 0%, rgb(24, 24, 24) 25%);; 
 
 
         --text-base: var(--color-white);
@@ -41,6 +42,7 @@
         --button-secondary-bg: var(--color-dark-grey) ;
         --button-secondary-hover: var(--color-grey) ;
         --button-info-hover: var(--color-grey-secondary) ;
+        --card-movie-bg : var(--gradient-black);
 
         --nav-bg: ;
 

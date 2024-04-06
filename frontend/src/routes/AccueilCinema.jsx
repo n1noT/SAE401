@@ -5,14 +5,12 @@ import ListedMovies from '../ui/ListedMovies';
 
 export default function Genre() {
     
-    const data = {movies : useContext(moviesContext), categories : useContext(categoriesContext)};
+  const data = {movies : useContext(moviesContext), categories : useContext(categoriesContext)};
    
-      
-    
-    return (
-      <ul className='flex'>
-        <ListedMovies data={data}/>
-        
-      </ul>
-    )
+  return (
+    <ul className='flex'>
+      <ListedMovies data={data}/>
+
+    </ul>
+  )
 }

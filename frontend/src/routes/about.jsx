@@ -1,8 +1,6 @@
 import {Link} from 'react-router-dom';
 
 export default function About() {
-    
-  
     return (
       <div className="flex flex-col space-y-5 items-center my-20">
         <h1>About this app</h1>

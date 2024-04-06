@@ -7,7 +7,6 @@ export default function ListedMovies ({data}){
 
     let categoryList = [];
 
-    
 
     for (let category of data.categories){
     
@@ -18,7 +17,7 @@ export default function ListedMovies ({data}){
         
         return (
             <Carousel.Item>
-                <div key={mov.id} className=" m-1 w-full">
+                <div key={mov.id} className="w-full">
                 <Link to={'/movie/'+ mov.id}>
                     <Card
                     bgImage={imageBox}
@@ -52,7 +51,7 @@ export default function ListedMovies ({data}){
         <li className='mt-8 '>
             <h3 className='text-clr-T-base font-button-secondary text-2xl font-bold m-1'>{category.name}</h3>
             <div >
-                <Carousel cols={colNum} row={1} gap={8} loop>
+                <Carousel cols={colNum} row={1} gap={8} loop >
                     {moviesList}
                 </Carousel>
                 

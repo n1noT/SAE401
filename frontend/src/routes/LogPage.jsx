@@ -1,21 +1,10 @@
-import React, { useState } from 'react';
-import { Link, useLoaderData } from 'react-router-dom';
-// import { fetchUser } from "../lib/loaders.js";
+import React from 'react';
+import { Link} from 'react-router-dom';
 import { getCookie } from '../lib/utils';
 import Button from '../ui/Button';
 
-/*
-export async function loader(){
-  let cookie = await fetchUser();
-  console.log('loader')
-  console.log(cookie);
-  return !!cookie
-}
-*/
-
 export default function LogPage() {
 
-  
     let userName = getCookie('email')
 
     return(

@@ -16,7 +16,6 @@ export async function fetchAllCategoriesData() {
 export async function fetchSearch(searched) {
     let answer = await fetch('http://localhost:8080/api/movies/searchContent?search=' + searched);
     let data = await answer.json();
- 
     return data; 
 }
 
@@ -44,8 +43,14 @@ export async function fetchPlaylist(){
         let answer = await fetch('http://localhost:8080/api/playlist', { credentials:'include'});
 
         const responseData = await answer.json();
-        console.log(responseData)
-        return responseData;
+        
+        let formatData = [];
+
+        for(let mov of responseData){
+            formatData.push(mov.movie)
+        }
+
+        return formatData;
 
     }
     else{

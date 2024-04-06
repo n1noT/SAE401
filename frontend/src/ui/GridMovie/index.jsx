@@ -6,7 +6,7 @@ export default function GridMovie({data}){
     let moviesList = data.map((mov) => {
         let imageBox = '/assets/images/' + mov.urlImage;
         return (
-          <li key={mov.id} className=" m-1 w-full ">
+          <li key={mov.id} className="w-full ">
             <Link to={'/movie/' + mov.id}>
               <Card
                 bgImage={imageBox}
