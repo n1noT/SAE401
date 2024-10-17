@@ -2,7 +2,7 @@ nelmio_cors:
     defaults:
         allow_credentials: true
         origin_regex: true
-        allow_origin: ['^http://localhost:8090$']
+        allow_origin: ['^https?://(localhost|127\.0\.0\.1|shiny-eureka-979x44wgr6jwc7q4x-8090\.app\.github\.dev)(:[0-9]+)?$']
         allow_methods: ['GET', 'OPTIONS', 'POST', 'PUT', 'PATCH', 'DELETE']
         allow_headers: ['Content-Type', 'Authorization']
         expose_headers: ['Link']
